@@ -65,41 +65,41 @@ def submit():
     input = np.concatenate(np.array([dep_time, arrival_time, duration, month, day, week_of_year, next_day]), 
                            airline_array, total_stops_array, additional_info_array, source_array, destination_array)
 
-    # import requests
+    import requests
 
-    # # NOTE: you must manually set API_KEY below using information retrieved from your IBM Cloud account.
-    # API_KEY = "dErnzVwz67vEC_oV02F_j7a_wVxYYIqUf0Ur8_3q_T7q"
-    # token_response = requests.post('https://iam.cloud.ibm.com/identity/token', data={"apikey":
-    # API_KEY, "grant_type": 'urn:ibm:params:oauth:grant-type:apikey'})
-    # mltoken = token_response.json()["access_token"]
+    # NOTE: you must manually set API_KEY below using information retrieved from your IBM Cloud account.
+    API_KEY = "dErnzVwz67vEC_oV02F_j7a_wVxYYIqUf0Ur8_3q_T7q"
+    token_response = requests.post('https://iam.cloud.ibm.com/identity/token', data={"apikey":
+    API_KEY, "grant_type": 'urn:ibm:params:oauth:grant-type:apikey'})
+    mltoken = token_response.json()["access_token"]
 
-    # header = {'Content-Type': 'application/json', 'Authorization': 'Bearer ' + mltoken}
+    header = {'Content-Type': 'application/json', 'Authorization': 'Bearer ' + mltoken}
 
-    # # NOTE: manually define and pass the array(s) of values to be scored in the next line
-    # payload_scoring = {"input_data": 
-    #                    [{"fields": 
-    #                      [
-    #                          "Dep_Time", "Arrival_Time", "Duration", "Month", "Day", "WeekOfYear", "Next_Day",
-    #                          "Airline_IndiGo","Airline_Air India","Airline_Jet Airways", "Airline_Jet Airways Business", "Airline_Air Asia",
-    #                          "Airline_SpiceJet","Airline_GoAir","Airline_Vistara","Airline_Multiple carriers",
-    #                          "Total_Stops_1 stop", "Total_Stops_2 stops","Total_Stops_3 stops", "Total_Stops_4 stops", "Total_Stops_non-stop",
-    #                          "Additional_Info_No info", "Additional_Info_In-flight meal not included", "Additional_Info_No check-in baggage included",
-    #                          "Additional_Info_1 Short layover","Additional_Info_1 Long layover", "Additional_Info_Change airports",
-    #                          "Additional_Info_Business class","Additional_Info_Red-eye flight","Additional_Info_2 Long layover", 
-    #                          "Source_Banglore","Source_Kolkata","Source_Delhi", "Source_Chennai", "Source_Mumbai", 
-    #                          "Destination_Banglore", "Destination_Kolkata","Destination_Delhi","Destination_Cochin","Destination_Hyderabad"
-    #                     ],
-    #                     "values": [input]
-    #                     }]
-    #                     }
+    # NOTE: manually define and pass the array(s) of values to be scored in the next line
+    payload_scoring = {"input_data": 
+                       [{"fields": 
+                         [
+                             "Dep_Time", "Arrival_Time", "Duration", "Month", "Day", "WeekOfYear", "Next_Day",
+                             "Airline_IndiGo","Airline_Air India","Airline_Jet Airways", "Airline_Jet Airways Business", "Airline_Air Asia",
+                             "Airline_SpiceJet","Airline_GoAir","Airline_Vistara","Airline_Multiple carriers",
+                             "Total_Stops_1 stop", "Total_Stops_2 stops","Total_Stops_3 stops", "Total_Stops_4 stops", "Total_Stops_non-stop",
+                             "Additional_Info_No info", "Additional_Info_In-flight meal not included", "Additional_Info_No check-in baggage included",
+                             "Additional_Info_1 Short layover","Additional_Info_1 Long layover", "Additional_Info_Change airports",
+                             "Additional_Info_Business class","Additional_Info_Red-eye flight","Additional_Info_2 Long layover", 
+                             "Source_Banglore","Source_Kolkata","Source_Delhi", "Source_Chennai", "Source_Mumbai", 
+                             "Destination_Banglore", "Destination_Kolkata","Destination_Delhi","Destination_Cochin","Destination_Hyderabad"
+                        ],
+                        "values": [input]
+                        }]
+                        }
 
-    # response_scoring = requests.post('https://us-south.ml.cloud.ibm.com/ml/v4/deployments/807e777c-b658-4709-8721-5a9e7680ef30/predictions?version=2021-05-01', json=payload_scoring,
-    # headers={'Authorization': 'Bearer ' + mltoken})
-    # print("Scoring response")
-    # print(response_scoring.json())
-    # if response_scoring.status_code == 200:
-    #     response_scoring_data=response_scoring.json()
-    #     output=response_scoring_data['predictions'][0]['values'][0][0]
+    response_scoring = requests.post('https://us-south.ml.cloud.ibm.com/ml/v4/deployments/807e777c-b658-4709-8721-5a9e7680ef30/predictions?version=2021-05-01', json=payload_scoring,
+    headers={'Authorization': 'Bearer ' + mltoken})
+    print("Scoring response")
+    print(response_scoring.json())
+    if response_scoring.status_code == 200:
+        response_scoring_data=response_scoring.json()
+        output=response_scoring_data['predictions'][0]['values'][0][0]
 
     for i in input:
         print(input[i])
