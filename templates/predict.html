@@ -10,18 +10,16 @@
   <form action="{{url_for('submit')}}" method="POST">
     <label for="airline">Airline:</label>
     <select id="airl" name="airl" required>
-      <option value="">Indigo</option>
-      <option value="">Air India</option>
-      <option value="">Jet Airways</option>
-      <option value="">Jet Airways business</option>
-      <option value="">Chennai</option>
-      <option value="">SpiceJet</option>
-      <option value="">GoAir</option>
-      <option value="">Vistara</option>
-      <option value="">Vistara premium economy</option>
-      <option value="">Trujet</option>
-      <option value="">Multiple Carriers</option>
-      <option value="">Multiple Carriers premium economy</option>
+      <option value='' disabled selected>Make a selection</option>
+      <option value='1'>Indigo</option>
+      <option value='2'>Air India</option>
+      <option value='3'>Jet Airways</option>
+      <option value='4'>Jet Airways business</option>
+      <option value='5'>Air Asia</option>
+      <option value='6'>SpiceJet</option>
+      <option value='7'>Go Air</option>
+      <option value='8'>Vistara</option>
+      <option value='9'>Multiple Carriers</option>
     </select>
     <br><br>
 
@@ -30,21 +28,23 @@
 
     <label for="source">Source:</label>
     <select id="src" name="src" required>
-      <option value="">Banglore</option>
-      <option value="">Kolkata</option>
-      <option value="">Delhi</option>
-      <option value="">Chennai</option>
-      <option value="">Mumbai</option>
+      <option value='' disabled selected>Make a selection</option>
+      <option value='1'>Banglore</option>
+      <option value='2'>Kolkata</option>
+      <option value='3'>Delhi</option>
+      <option value='4'>Chennai</option>
+      <option value='5'>Mumbai</option>
     </select>
     <br><br>
 
     <label for="destination">Destination:</label>
     <select id="dest" name="dest" required>
-      <option value="">Banglore</option>
-      <option value="">Kolkata</option>
-      <option value="">Delhi</option>
-      <option value="">Cochin</option>
-      <option value="">Hyderabad</option>
+      <option value='' disabled selected>Make a selection</option>
+      <option value='1'>Banglore</option>
+      <option value='2'>Kolkata</option>
+      <option value='3'>Delhi</option>
+      <option value='4'>Cochin</option>
+      <option value='5'>Hyderabad</option>
     </select>
     <br><br>
 
@@ -57,20 +57,21 @@
     <br><br>
 
     <label for="stops">Total Stops:</label>
-    <input type="number" id="stops" name="stops" required>
+    <input type="number" id="stops" name="stops" min="0" max="4" required>
     <br><br>
 
     <label for="additional_info">Additional Info:</label>
     <select id="addinf" name="addinf" required>
-      <option value="">No info</option>
-      <option value="">In-flight meal not included</option>
-      <option value="">No check-in baggage included</option>
-      <option value="">1 Short layover</option>
-      <option value="">1 Long layover</option>
-      <option value="">Change airports</option>
-      <option value="">Business class</option>
-      <option value="">Red-eye flight</option>
-      <option value="">2 Long layover</option>
+      <option value='' disabled selected>Make a selection</option>
+      <option value='1'>No info</option>
+      <option value='2'>In-flight meal not included</option>
+      <option value='3'>No check-in baggage included</option>
+      <option value='4'>1 Short layover</option>
+      <option value='5'>1 Long layover</option>
+      <option value='6'>Change airports</option>
+      <option value='7'>Business class</option>
+      <option value='8'>Red-eye flight</option>
+      <option value='9'>2 Long layover</option>
     </select>
     <br><br>
 
