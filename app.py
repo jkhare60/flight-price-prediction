@@ -1,5 +1,4 @@
 from flask import Flask, render_template, request
-from datetime import datetime, time
 
 app = Flask(__name__)
 
@@ -15,15 +14,15 @@ def predict():
 def submit():
     
     import numpy as np
-    airline = request.form.get('airl')
+    airline = int(request.form.get('airl'))
     airline_array=np.array([0,0,0,0,0,0,0,0,0])
     airline_array[airline-1]=1
 
-    source = request.form.get('src')
+    source = int(request.form.get('src'))
     source_array=np.array([0,0,0,0,0])
     source_array[source-1]=1
     
-    destination = request.form.get('dest')
+    destination = int(request.form.get('dest'))
     destination_array=np.array([0,0,0,0,0])
     destination_array[destination-1]=1
 
@@ -39,31 +38,55 @@ def submit():
         dt2 += timedelta(days=1)
     duration = (dt2 - dt1).total_seconds() / 60
 
-    total_stops = request.form.get('stops')
+    total_stops = int(request.form.get('stops'))
     total_stops_array=np.array([0,0,0,0,0])
     total_stops_array[total_stops]=1
 
-    additional_info = request.form.get('addinf')
+    additional_info = int(request.form.get('addinf'))
     additional_info_array=np.array([0,0,0,0,0,0,0,0,0])
     additional_info_array[additional_info-1]=1
 
     import pandas as pd
     date_of_journey = request.form.get('date')
-    date_of_journey = pd.to_datetime(date_of_journey, format="%d/%m/%Y")
+    date_of_journey = pd.to_datetime(date_of_journey, format="%Y-%m-%d")
     month = date_of_journey.month
     day = date_of_journey.day
     week_of_year = date_of_journey.isocalendar().week
 
-    if len(arrival_time) <= 5:
+    if len(a_time) <= 5:
         next_day = 0
     else:
         next_day = 1
 
-    arrival_time = pd.to_datetime(arrival_time, format='%H:%M').hour
-    dep_time = pd.to_datetime(dep_time, format='%H:%M').hour
+    arrival_time = pd.to_datetime(a_time, format='%H:%M').hour
+    dep_time = pd.to_datetime(d_time, format='%H:%M').hour
 
-    input = np.concatenate(np.array([dep_time, arrival_time, duration, month, day, week_of_year, next_day]), 
-                           airline_array, total_stops_array, additional_info_array, source_array, destination_array)
+    # input = np.concatenate(np.array([dep_time, arrival_time, duration, month, day, week_of_year, next_day]), 
+    #                        airline_array, total_stops_array, additional_info_array, source_array, destination_array)
+
+    dep_time = np.array([dep_time])
+    arrival_time = np.array([arrival_time])
+    duration = np.array([duration])
+    month = np.array([month])
+    day = np.array([day])
+    week_of_year = np.array([week_of_year])
+    next_day = np.array([next_day])
+
+    input = np.concatenate((
+        dep_time,
+        arrival_time,
+        duration,
+        month,
+        day,
+        week_of_year,
+        next_day,
+        airline_array,
+        total_stops_array,
+        additional_info_array,
+        source_array,
+        destination_array
+    ), axis=0)
+    input = np.ndarray.tolist(input)
 
     import requests
 
@@ -89,7 +112,7 @@ def submit():
                              "Source_Banglore","Source_Kolkata","Source_Delhi", "Source_Chennai", "Source_Mumbai", 
                              "Destination_Banglore", "Destination_Kolkata","Destination_Delhi","Destination_Cochin","Destination_Hyderabad"
                         ],
-                        "values": [input]
+                        "values": input
                         }]
                         }
 
@@ -101,9 +124,6 @@ def submit():
         response_scoring_data=response_scoring.json()
         output=response_scoring_data['predictions'][0]['values'][0][0]
 
-    for i in input:
-        print(input[i])
-    output="hi"
 
     return render_template('submit.html', prediction_text=output)
 

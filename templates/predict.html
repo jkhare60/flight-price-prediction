@@ -2,13 +2,17 @@
 <html>
 <head>
   <title>Predict Price</title>
+  <link rel="stylesheet" type="text/css" href="flight.css">
 </head>
 <body>
-
-  <h1>Prediction Form</h1>
-
-  <form action="{{url_for('submit')}}" method="POST">
-    <label for="airline">Airline:</label>
+  <h1 class="home">Prediction Form</h1>
+  <div>
+  <form action="{{url_for('submit')}}" class="pred" method="POST">
+    <div class="cc">
+    <div class="rc">
+    <label class="pred" for="airline">Airline:</label>
+    </div>
+    <div class="rc">
     <select id="airl" name="airl" required>
       <option disabled selected>Make a selection</option>
       <option value='1'>Indigo</option>
@@ -21,12 +25,19 @@
       <option value='8'>Vistara</option>
       <option value='9'>Multiple Carriers</option>
     </select>
-    <br><br>
-
-    <label for="date">Date of Journey:</label>
+  </div></div>
+    <div class="cc">
+    <div class="rc">
+    <label class="pred" for="date">Date of Journey:</label>
+    </div>
+    <div class="rc">
     <input type="date" id="date" name="date" required><br><br>
-
-    <label for="source">Source:</label>
+    </div></div>
+    <div class="cc">
+    <div class="rc">
+    <label class="pred" for="source">Source:</label>
+    </div class="rc">
+    <div class="rc">
     <select id="src" name="src" required>
       <option disabled selected>Make a selection</option>
       <option value='1'>Banglore</option>
@@ -35,9 +46,12 @@
       <option value='4'>Chennai</option>
       <option value='5'>Mumbai</option>
     </select>
-    <br><br>
-
-    <label for="destination">Destination:</label>
+    </div></div>
+    <div class="cc">
+    <div class="rc">
+    <label class="pred" for="destination">Destination:</label>
+    </div>
+    <div class="rc">
     <select id="dest" name="dest" required>
       <option disabled selected>Make a selection</option>
       <option value='1'>Banglore</option>
@@ -46,21 +60,34 @@
       <option value='4'>Cochin</option>
       <option value='5'>Hyderabad</option>
     </select>
-    <br><br>
-
-    <label for="dep_time">Departure Time:</label>
+    </div></div>
+    <div class="cc">
+    <div class="rc">
+    <label class="pred" for="dep_time">Departure Time:</label>
+    </div>
+    <div class="rc">
     <input type="time" id="dep_time" name="dep_time" required>
-    <br><br>
-
-    <label for="arrival_time">Arrival Time:</label>
+    </div></div>
+    <div class="cc">
+    <div class="rc">
+    <label class="pred" for="arrival_time">Arrival Time:</label>
+    </div>
+    <div class="rc">
     <input type="time" id="arrival_time" name="arrival_time" required>
-    <br><br>
-
-    <label for="stops">Total Stops:</label>
+    </div></div>
+    <div class="cc">
+    <div class="rc">
+    <label class="pred" for="stops">Total Stops:</label>
+    </div>
+    <div class="rc">
     <input type="number" id="stops" name="stops" min="0" max="4" required>
-    <br><br>
-
-    <label for="additional_info">Additional Info:</label>
+    </div>
+  </div>
+    <div class="cc">
+    <div class="rc">
+    <label class="pred" for="additional_info">Additional Info:</label>
+    </div>
+    <div class="rc">
     <select id="addinf" name="addinf" required>
       <option disabled selected>Make a selection</option>
       <option value='1'>No info</option>
@@ -73,9 +100,14 @@
       <option value='8'>Red-eye flight</option>
       <option value='9'>2 Long layover</option>
     </select>
-    <br><br>
-
-    <input type="submit" value="Submit">
+  </div>
+</div>
+    <div class="cc">
+    <div class="container">
+    <button type="submit" value="Submit" class="home">Submit</button>
+    </div>
+  </div>
   </form>
+  </div>
 </body>
 </html>
