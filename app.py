@@ -61,9 +61,6 @@ def submit():
     arrival_time = pd.to_datetime(a_time, format='%H:%M').hour
     dep_time = pd.to_datetime(d_time, format='%H:%M').hour
 
-    # input = np.concatenate(np.array([dep_time, arrival_time, duration, month, day, week_of_year, next_day]), 
-    #                        airline_array, total_stops_array, additional_info_array, source_array, destination_array)
-
     dep_time = np.array([dep_time])
     arrival_time = np.array([arrival_time])
     duration = np.array([duration])
@@ -92,7 +89,7 @@ def submit():
     import requests
 
     # NOTE: you must manually set API_KEY below using information retrieved from your IBM Cloud account.
-    API_KEY = "dErnzVwz67vEC_oV02F_j7a_wVxYYIqUf0Ur8_3q_T7q"
+    API_KEY = ""
     token_response = requests.post('https://iam.cloud.ibm.com/identity/token', data={"apikey":
     API_KEY, "grant_type": 'urn:ibm:params:oauth:grant-type:apikey'})
     mltoken = token_response.json()["access_token"]
@@ -118,7 +115,7 @@ def submit():
                         }
     print(payload_scoring)
 
-    response_scoring = requests.post('https://us-south.ml.cloud.ibm.com/ml/v4/deployments/5382e4f0-a894-4f50-8d0f-0830f352bd55/predictions?version=2021-05-01', json=payload_scoring,
+    response_scoring = requests.post('', json=payload_scoring,
     headers={'Authorization': 'Bearer ' + mltoken})
     print("Scoring response")
     if response_scoring.status_code == 200:
