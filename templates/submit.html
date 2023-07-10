@@ -2,7 +2,7 @@
 <html>
 <head>
   <title>Thank you!</title>
-  <link rel="stylesheet" type="text/css" href="flight.css">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='flight.css') }}">
 </head>
 <body>
   <h1 class="home">Our model predicts the price will be Rs. {{prediction_text}}/- only...</h1>
