@@ -87,6 +87,7 @@ def submit():
         destination_array
     ), axis=0)
     input = np.ndarray.tolist(input)
+    input=[input]
 
     import requests
 
@@ -115,15 +116,14 @@ def submit():
                         "values": input
                         }]
                         }
+    print(payload_scoring)
 
-    response_scoring = requests.post('https://us-south.ml.cloud.ibm.com/ml/v4/deployments/807e777c-b658-4709-8721-5a9e7680ef30/predictions?version=2021-05-01', json=payload_scoring,
+    response_scoring = requests.post('https://us-south.ml.cloud.ibm.com/ml/v4/deployments/5382e4f0-a894-4f50-8d0f-0830f352bd55/predictions?version=2021-05-01', json=payload_scoring,
     headers={'Authorization': 'Bearer ' + mltoken})
     print("Scoring response")
-    print(response_scoring.json())
     if response_scoring.status_code == 200:
         response_scoring_data=response_scoring.json()
         output=response_scoring_data['predictions'][0]['values'][0][0]
-
 
     return render_template('submit.html', prediction_text=output)
 
