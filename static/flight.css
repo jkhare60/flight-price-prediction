@@ -1,5 +1,5 @@
 body{
-    background-image: url_for('static', filename='plane.webp');
+    background-image: url('plane.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     color: rgb(66, 132, 156);
